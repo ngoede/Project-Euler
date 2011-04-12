@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace ProjectEuler11 {
-	class Program {
+	public static class Program {
 
 		static int[][] numbersGrid =
 @"08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
@@ -35,7 +35,7 @@ namespace ProjectEuler11 {
 			var max = 0;
 			foreach (var row in numbersGrid) {
 				for (int i = 0; i <= (columnCount - 4); i++) {
-					var result = new[] { row[i], row[i + 1], row[i + 2], row[i + 3] }.Sum();
+					var result = new[] { row[i], row[i + 1], row[i + 2], row[i + 3] }.Product();
 					if (result > max) max = result;
 				}
 			}
@@ -43,7 +43,23 @@ namespace ProjectEuler11 {
 			//Down
 			for (int i = 0; i < columnCount; i++) {
 				for (int j = 0; j <= rowCount - 4; j++) {
-					var result = new[] { numbersGrid[i][j], numbersGrid[i][j + 1], numbersGrid[i][j + 2], numbersGrid[i][j + 3] }.Sum();
+					var result = new[] { numbersGrid[i][j], numbersGrid[i][j + 1], numbersGrid[i][j + 2], numbersGrid[i][j + 3] }.Product();
+					if (result > max) max = result;
+				}
+			}
+
+			//Down-Right
+			for (int i = 0; i < columnCount - 4; i++) {
+				for (int j = 0; j <= rowCount - 4; j++) {
+					var result = new[] { numbersGrid[i][j], numbersGrid[i + 1][j + 1], numbersGrid[i + 2][j + 2], numbersGrid[i + 3][j + 3] }.Product();
+					if (result > max) max = result;
+				}
+			}
+
+			//Down-Left
+			for (int i = columnCount - 1; i > 3; i--) {
+				for (int j = 0; j <= rowCount - 4; j++) {
+					var result = new[] { numbersGrid[i][j], numbersGrid[i - 1][j + 1], numbersGrid[i - 2][j + 2], numbersGrid[i - 3][j + 3] }.Product();
 					if (result > max) max = result;
 				}
 			}
@@ -51,5 +67,12 @@ namespace ProjectEuler11 {
 			Console.WriteLine(max);
 			Console.ReadLine();
 		}
+
+		public static int Product(this IEnumerable<int> list) {
+			return list.Aggregate(1, (i, product) => i * product);
+		}
+
 	}
+
+	
 }
