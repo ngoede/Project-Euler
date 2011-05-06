@@ -16,6 +16,27 @@ text = <<EOF
 04 62 98 27 23 09 70 98 73 93 38 53 60 04 23
 EOF
 
-list = text.map {|line| line.split(" ").map {|x| x.to_i } }
+short_text = <<EOF
+3
+7 4
+2 4 6
+8 5 9 3
+EOF
 
-def create_tree(list, parent)
+class Node
+  attr :value
+  
+  def initialize(value, left, right)
+    @value = value
+    @left = left
+    @right = right
+  end
+  
+  def to_s
+    "#{@value} \n#{@left.to_s} #{@right.to_s}"
+  end
+    
+end
+
+tree = short_text.each_line {|l| l.split(" ") }
+
