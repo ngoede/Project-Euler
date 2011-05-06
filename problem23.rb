@@ -12,7 +12,6 @@ end
 
 def abundant?(n, primes)
   divs = divisors(n, primes)
-  puts n if divs.empty?
   sum = divs.reduce(:+) - n
   sum > n
 end
