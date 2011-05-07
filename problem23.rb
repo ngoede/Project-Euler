@@ -14,24 +14,27 @@ end
 $prime_nums = primes 28123
 
 def divisors(n)
-  less_primes = $prime_nums.take_while {|p| p <= Math.sqrt(n)}
-  divisors = [1]
+  less_primes = $prime_nums.take_while {|p| p <= n / 2}.find_all {|x| n % x == 0}
+
+  divisors = [1] + less_primes
   less_primes.each do |x|
-    if n % x == 0 then
-      divisors << x
-      i = n / x
-      while (n % i) == 0 and i >= x
-        divisors << i
-        divisors << n / i
-        i = i / x
-      end
+    i = x ** 2
+    while n % i == 0
+      divisors << i
+      i *= x
     end
   end
-  divisors | less_primes.combination(2).map {|i| i[0] * i[1]}.find_all {|x| n % x == 0}
+  multiple_divisors = []
+  for i in 1...divisors.length + 1
+      multiple_divisors += divisors.combination(i).map {|i| i.reduce(:*)}.find_all {|x| n % x == 0}
+  end
+  divisors | multiple_divisors
 end
 
 def abundant?(n)
-  divisors(n).reduce(:+) > n
+  d = divisors(n)
+  d.delete(n)
+  d.reduce(:+) > n
 end
 
 abundant = (2..28123).find_all {|i| abundant?(i)}
