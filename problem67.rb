@@ -2,17 +2,35 @@ text = File.open("triangle.txt", "r").read
 
 class Node
   attr_reader :value
-  attr_reader :left
-  attr_reader :right
   
-  NumberToLookAhead = 3
+  def left
+    if @y >= (@raw.length - 1) then
+      return nil
+    end
+    if @left.nil? then
+      @left = Node.new(@raw[@y+1][@x], @y + 1, @x, @raw)
+    end
+    @left
+  end
+  
+  def right
+    if @y >= (@raw.length - 1) then
+      return nil
+    end
+    
+    if @right.nil? then
+      @right = Node.new(@raw[@y+1][@x+1], @y + 1, @x + 1, @raw)
+    end
+    @right
+  end
+  
+  NumberToLookAhead = 15
   
   def initialize	(value, y, x, raw)
+    @y = y
+    @x = x
+    @raw = raw
     @value = value
-    if raw.length - 1 > y then
-      @left = Node.new(raw[y+1][x], y + 1, x, raw)
-      @right = Node.new(raw[y+1][x+1], y + 1, x + 1, raw)
-    end
   end
   
   def max
