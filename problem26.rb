@@ -24,31 +24,30 @@ def division(value)
   DivisionValue.new(value.denominator, whole, remain * 10)
 end
 
-def brent(x0)
-  power = lam = 1
-  tortoise = x0
-  hare = division(x0)
-  while(tortoise != hare)
-    if power == lam then
-      tortoise = hare
-      power *= 2
-      lam = 0
-    end
-    hare = division(hare)
-    lam += 1
+def floyd(x0)
+  tortoise = division(x0)
+  hare = division(division(x0))
+  while tortoise != hare
+    tortoise = division(tortoise)
+    hare = division(division(hare))
   end
   
   mu = 0
-  torotise = hare = x0
-  (1..lam).each do |i|
-    hare = division(hare)
-  end
+  hare = tortoise
+  tortoise = x0
   while tortoise != hare
     tortoise = division(tortoise)
     hare = division(hare)
     mu += 1
   end
+  
+  lam = 1
+  hare = division(tortoise)
+  while tortoise != hare
+    hare = division(hare)
+    lam += 1
+  end
   [lam, mu]
 end
 
-p brent(DivisionValue.new 7, 0, 1)
+p (1..1000).map {|x| floyd(DivisionValue.new x, 0, 1) << x }.max_by {|x| x[0] }
