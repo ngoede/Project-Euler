@@ -25,29 +25,29 @@ def division(value)
 end
 
 def floyd(x0)
-  tortoise = division(x0)
-  hare = division(division(x0))
+  tortoise = yield(x0)
+  hare = yield(yield(x0))
   while tortoise != hare
-    tortoise = division(tortoise)
-    hare = division(division(hare))
+    tortoise = yield(tortoise)
+    hare = yield(yield(hare))
   end
   
   mu = 0
   hare = tortoise
   tortoise = x0
   while tortoise != hare
-    tortoise = division(tortoise)
-    hare = division(hare)
+    tortoise = yield(tortoise)
+    hare = yield(hare)
     mu += 1
   end
   
   lam = 1
-  hare = division(tortoise)
+  hare = yield(tortoise)
   while tortoise != hare
-    hare = division(hare)
+    hare = yield(hare)
     lam += 1
   end
   [lam, mu]
 end
 
-p (1..1000).map {|x| floyd(DivisionValue.new x, 0, 1) << x }.max_by {|x| x[0] }
+p (1..1000).map {|x| floyd(DivisionValue.new x, 0, 1) {|d| division d} << x }.max_by {|x| x[0] }
