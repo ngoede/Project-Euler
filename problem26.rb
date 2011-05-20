@@ -8,6 +8,13 @@ class DivisionValue
     @digit = digit
     @remainder = remain
   end
+  
+  def ==(other)
+    other != nil &&
+    self.denominator == other.denominator &&
+    self.digit == other.digit &&
+    self.remainder == other.remainder
+  end
 end
 
 def division(value)
@@ -21,7 +28,7 @@ def brent(x0)
   power = lam = 1
   tortoise = x0
   hare = division(x0)
-  while(tortoise.digit != hare.digit)
+  while(tortoise != hare)
     if power == lam then
       tortoise = hare
       power *= 2
@@ -36,7 +43,7 @@ def brent(x0)
   (1..lam).each do |i|
     hare = division(hare)
   end
-  while tortoise.digit != hare.digit
+  while tortoise != hare
     tortoise = division(tortoise)
     hare = division(hare)
     mu += 1
