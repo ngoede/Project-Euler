@@ -11,7 +11,7 @@ class Integer
 end
 
 max_pand = 0
-test_range = 1..10_000
+test_range = [9] + (91..98).to_a + (912..987).to_a + (9123..9876).to_a
 test_range.each do |num|
 	i = 1
 	pand = 0
