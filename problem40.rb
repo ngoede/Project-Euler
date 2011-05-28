@@ -1,2 +1,2 @@
 s = (1..10_000_000).inject("") {|result, x| result << x.to_s }
-puts s[0, 1].to_i * s[9, 1].to_i * s[99, 1].to_i * s[999, 1].to_i * s[9_999, 1].to_i * s[99_999, 1].to_i * s[999_999].to_i
+puts [1, 10, 100, 1000, 10_000, 100_000, 1_000_000].map {|i| i - 1}.map {|i| s[i..i].to_i }.reduce(:*)
