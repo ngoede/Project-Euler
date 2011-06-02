@@ -8,8 +8,8 @@ def pentagonal? x
 end
 
 min_diff = 100_000_000
-(1..100000).each do |j|
-  ((j+1)..(j + 100)).each do |k|
+(1..10000).each do |j|
+  ((j+1)..10000).each do |k|
     sum = pentagonal(j) + pentagonal(k)
     diff = pentagonal(k) - pentagonal(j)
     min_diff = diff if diff < min_diff and pentagonal? sum and pentagonal? diff
