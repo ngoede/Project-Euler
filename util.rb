@@ -23,3 +23,9 @@ module Util
     end
   end
 end
+
+class Integer
+	def palendromic?
+		self.to_s.reverse == self.to_s
+	end
+end
