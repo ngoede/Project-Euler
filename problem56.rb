@@ -4,8 +4,19 @@ def digital_sum(n)
 end
 
 def max_pow(n)
- (1..100).max_by {|b| p n ** b;digital_sum(n**b) }
+  max = 0
+	(1..100).each do |b|
+	  current = digital_sum(n**b)
+		max = current if current > max
+	end
+	max
 end
 
-p max_pow 99
-#puts (99.upto(99).max_by {|a|  } })
+max = 0
+
+1.upto(99).each do |n|
+	current = max_pow n
+	max = current if current > max
+end
+
+puts max
