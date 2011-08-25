@@ -29,3 +29,25 @@ class Integer
 		self.to_s.reverse == self.to_s
 	end
 end
+
+class SpiralCorners
+  include Enumerable
+  
+  def initialize(n)
+    @n = n
+  end
+  
+  def each_with_side_length
+    size_of_current = 3
+    current = 1
+    while size_of_current <= @n
+      4.times { yield current += size_of_current - 1, size_of_current}
+      size_of_current += 2
+    end
+  end
+  
+  def each()
+    each_with_side_length {|c,l| yield c }
+  end
+    
+end
