@@ -51,3 +51,18 @@ class SpiralCorners
   end
     
 end
+
+class DictionaryOfCommonWords
+  
+  def initialize
+    contents = ""
+    File.open("words.txt") {|file| contents = file.read }
+    
+    contents.gsub!('"', '')
+    @words = contents.split(",").map {|w| w.downcase }.to_a
+  end
+
+  def words
+    @words
+  end
+end
