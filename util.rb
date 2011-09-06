@@ -28,6 +28,23 @@ class Integer
 	def palendromic?
 		self.to_s.reverse == self.to_s
 	end
+  
+  def prime?
+    return false if self == 1
+    return true if self < 4
+    return false if (self % 2) == 0
+    return true if self < 9
+    return false if (self % 3) == 0
+    
+    r = Math::sqrt(self).to_i
+    f = 5
+    while f <= r
+      return false if self % f == 0
+      return false if self % (f + 2) == 0
+      f = f + 6
+    end
+    return true
+  end
 end
 
 class SpiralCorners
