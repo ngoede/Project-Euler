@@ -1,7 +1,5 @@
 require './util'
 
-
-
 def decrypt
   dictionary = DictionaryOfCommonWords.new
   contents = ""
@@ -13,14 +11,15 @@ def decrypt
       (97..122).each do |third|
         result = ""
         encrypted.each_slice(3) do |e|
-          result << (e[0].to_i ^ first).chr
-          result << (e[1].to_i ^ second).chr
-          result << (e[2].to_i ^ third).chr
+          result << (e[0].to_i ^ first).chr if e[0]
+          result << (e[1].to_i ^ second).chr if e[1]
+          result << (e[2].to_i ^ third).chr if e[2]
         end
         return result if dictionary.words.count {|w| result.include? w } > 50
       end
     end
   end
 end
-
-puts decrypt
+result = decrypt
+p result
+puts result.each_byte.map {|c| c.to_i }.reduce(:+)
