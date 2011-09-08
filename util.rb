@@ -1,3 +1,5 @@
+require 'memoize'
+include Memoize
 module Util
   def get_primes n
     max_non_prime = Integer(Math.sqrt(n))
@@ -45,6 +47,7 @@ class Integer
     end
     return true
   end
+  memoize :prime?
 end
 
 class SpiralCorners
