@@ -36,92 +36,115 @@ class Card
   end
 end
 
-class HandType
-	def initialize(&block)
-		@block = block
-	end
-	
-	def match hand
-		block.call(hand)
+class HandResult
+	attr_reader :match?, :cards_in_set
+
+	def initialize(match?, cards_in_set, cards_not_in_set)
+		@match? = match?
+		@cards_in_set = cards_in_set
 	end
 end
 
 class Hand
-  attr_reader :cards
+  	attr_reader :cards
   
-  def initialize(cards_strings)
-    @cards = cards_strings.map {|s| Card.new s}
-  end
-  
-  def >(right)
-    self_best_card = self.cards.sort[-1]
-    right_best_card = right.cards.sort[-1]
-    self_best_card > right_best_card
-  end
-end
+  	def initialize(cards_strings)
+    	@cards = cards_strings.map {|s| Card.new s}
+  	end
 
-def royal_flush
-	sf = straight_flush(hand)
-	if sf.match? and sf.high_card_in_set.num == 13 then
-		sf
-	else
-		Struct.new :match? => false
+  	def check_hand(self_result, hand_result)
+  		if(self_result.match? and hand_result.match?) then
+  			if self_result.high_card_in_set == hand_result.high_card_in_set then
+  				return self_result.
+  			return self_result.high_card_in_set > hand_result
+  		end
+  	end
+
+  	def beats hand
+  		hand_types = [
+  			:royal_flush,
+  			:straight_flush,
+  			:four_of_a_kind,
+  			:full_house, #implement
+  			:flush,
+  			:straight,
+  			:three_of_a_kind,
+  			:two_pairs,
+  			:pair #implement
+  			:high_card #implement
+  		]
+  		hand_types.each do |type|
+  			self_result = self.method(type).call()
+  			hand_result = hand.method(type).call()
+  			check_hand(self_result, hand_result)
+
+  	end
+
+  	NO_MATCH = HandResult.new false, []
+ 
+	def royal_flush
+		sf = straight_flush(self)
+		if sf.match? and sf.cards_in_set.sort.first.num == 13 then
+			sf
+		else
+			NO_MATCH
+		end
 	end
-end
 
-def straight_flush
-	if flush(hand).match? and straight(hand).match? then
-		Struct.new :match? => true, :high_card_in_set => hand.cards.sort[-1], :high_card => nil
-	else
-		Struct.new :match? => false
+	def straight_flush
+		if flush(hand).match? and straight(self).match? then
+			HandResult.new true, self.cards
+		else
+			NO_MATCH
+		end
 	end
-end
 
-def flush hand
-	if hand.cards.all? {|c| c.suit == hand.cards[0].suit } then
-		Struct.new :match? => true, :high_card_in_set => hand.cards.sort[-1], :high_card => nil
-	else
-		Struct.new :match? => false
+	def flush
+		if self.cards.all? {|c| c.suit == self.cards[0].suit } then
+			HandResult.new true, self.cards
+		else
+			NO_MATCH
+		end
 	end
-end
 
-def four_of_a_kind hand
-	s = sets(hand)
-	if not s.empty? and s.first.length == 4 then
-		Struct.new :match? => true, :high_card_in_set => s.first[0], :high_card => nil
-	else
-		Struct.new :match? => false
+	def four_of_a_kind
+		s = sets(self)
+		if not s.empty? and s.first.length == 4 then
+			HandResult.new true, s.first
+		else
+			NO_MATCH
+		end
 	end
-end
 
-def three_of_a_kind hand
-	s = sets(hand)
-	if not s.empty? and s.length == 1 and s.max_by {|k,v| v.length}.length == 3 then
-		Struct.new :match? => true, :high_card_in_set =>  s.max_by {|h| h.length}[0], :high_card => nil
-	else
-		Struct.new :match? => false
+	def three_of_a_kind
+		s = sets(self)
+		if not s.empty? and s.first.length == 3 then
+			HandResult.new true, s.first, s.last
+		else
+			NO_MATCH
+		end
 	end
-end
 
-def two_pairs hand
-	s = sets (hand)
-	if not s.empty? and s.length == 2 and s.all? { |k,v| v.length == 2 }
-		Struct.new :match? => true, :high_card_in_set =>  s.max_by {|h| h.length}[0], :high_card => hand.cards.max
-	else
-		Struct.new :match? => false
+	def two_pairs
+		s = sets (self)
+		if not s.empty? and s.length == 2 and s.all? { |k,v| v.length == 2 }
+			HandResult.new true, sets.flatten
+		else
+			NO_MATCH
+		end
 	end
-end
 
-def sets hand
-	 hand.cards.group_by { |c| c.num }.select {|key,value| value.length > 1 }
-end
+	def straight
+		sorted_hand = self.cards.sort
+		if sorted_hand[-1].num - sorted_hand[0].num == 5 and sorted_hand.group_by {|c| c.num}.length == 5 then
+			Struct.new :match? => true, :high_card_in_set => sorted_hand[-1], :high_card => nil
+		else
+			NO_MATCH
+		end
+	end
 
-def straight hand
-	sorted_hand = hand.cards.sort
-	if sorted_hand[-1].num - sorted_hand[0].num == 5 and sorted_hand.group_by {|c| c.num}.length == 5 then
-		Struct.new :match? => true, :high_card_in_set => sorted_hand[-1], :high_card => nil
-	else
-		Struct.new :match? => false
+	def sets (hand)
+		 hand.cards.group_by { |c| c.num }.select {|key,value| value.length > 1 }.sort_by {|s| s.length}
 	end
 end
 
