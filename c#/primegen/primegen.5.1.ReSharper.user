@@ -3,12 +3,30 @@
     <string />
     <integer />
     <boolean>
+      <setting name="livetemplates.csharp.usevar">True</setting>
       <setting name="SolutionAnalysisEnabled">False</setting>
     </boolean>
   </SettingsComponent>
   <RecentFiles>
-    <RecentFiles />
-    <RecentEdits />
+    <RecentFiles>
+      <File id="5A7D1AC7-1B7C-4275-9C7A-34DD7709E64A/f:Program.cs" caret="309" fromTop="11" />
+      <File id="5A7D1AC7-1B7C-4275-9C7A-34DD7709E64A/f:LargeBitArray.cs" caret="899" fromTop="25" />
+    </RecentFiles>
+    <RecentEdits>
+      <File id="5A7D1AC7-1B7C-4275-9C7A-34DD7709E64A/f:LargeBitArray.cs" caret="1395" fromTop="19" />
+      <File id="5A7D1AC7-1B7C-4275-9C7A-34DD7709E64A/f:LargeBitArray.cs" caret="1395" fromTop="9" />
+      <File id="5A7D1AC7-1B7C-4275-9C7A-34DD7709E64A/f:LargeBitArray.cs" caret="1395" fromTop="21" />
+      <File id="5A7D1AC7-1B7C-4275-9C7A-34DD7709E64A/f:LargeBitArray.cs" caret="1395" fromTop="27" />
+      <File id="5A7D1AC7-1B7C-4275-9C7A-34DD7709E64A/f:LargeBitArray.cs" caret="461" fromTop="10" />
+      <File id="5A7D1AC7-1B7C-4275-9C7A-34DD7709E64A/f:LargeBitArray.cs" caret="461" fromTop="12" />
+      <File id="5A7D1AC7-1B7C-4275-9C7A-34DD7709E64A/f:LargeBitArray.cs" caret="1009" fromTop="21" />
+      <File id="5A7D1AC7-1B7C-4275-9C7A-34DD7709E64A/f:LargeBitArray.cs" caret="270" fromTop="10" />
+      <File id="5A7D1AC7-1B7C-4275-9C7A-34DD7709E64A/f:LargeBitArray.cs" caret="1009" fromTop="17" />
+      <File id="5A7D1AC7-1B7C-4275-9C7A-34DD7709E64A/f:LargeBitArray.cs" caret="167" fromTop="6" />
+      <File id="5A7D1AC7-1B7C-4275-9C7A-34DD7709E64A/f:LargeBitArray.cs" caret="1295" fromTop="37" />
+      <File id="5A7D1AC7-1B7C-4275-9C7A-34DD7709E64A/f:Program.cs" caret="309" fromTop="11" />
+      <File id="5A7D1AC7-1B7C-4275-9C7A-34DD7709E64A/f:LargeBitArray.cs" caret="1024" fromTop="29" />
+    </RecentEdits>
   </RecentFiles>
   <NAntValidationSettings>
     <NAntPath value="" />
@@ -21,4 +39,72 @@
     </NUnitInstallDir>
     <UseAddins>Never</UseAddins>
   </UnitTestRunnerNUnit>
+  <CompletionStatisticsManager>
+    <ItemStatistics item="Default">
+      <Item value="List" priority="3" />
+      <Item value="var" priority="11" />
+      <Item value="Enumerable`0" priority="1" />
+      <Item value="public" priority="1" />
+      <Item value="ctor" priority="0" />
+      <Item value="int" priority="10" />
+      <Item value="new" priority="8" />
+      <Item value="List&lt;int[]&gt;" priority="0" />
+      <Item value="const" priority="0" />
+      <Item value="for" priority="2" />
+      <Item value="maxIndex" priority="2" />
+      <Item value="remainingIndexes" priority="0" />
+      <Item value="IEnumerable" priority="1" />
+      <Item value="arraySize" priority="2" />
+      <Item value="MAX_ARRAY_SIZE" priority="7" />
+      <Item value="if" priority="1" />
+      <Item value="in" priority="0" />
+      <Item value="numberOfWholeArrays" priority="2" />
+      <Item value="arraysToCreate" priority="1" />
+      <Item value="return" priority="1" />
+      <Item value="foreach" priority="0" />
+      <Item value="ArraysToCreate`0" priority="0" />
+      <Item value="backingStore" priority="8" />
+      <Item value="array" priority="2" />
+      <Item value="BigArray" priority="0" />
+      <Item value="long" priority="4" />
+      <Item value="List&lt;long&gt;" priority="0" />
+      <Item value="sizeof" priority="0" />
+      <Item value="toCreate" priority="3" />
+      <Item value="arrayToCreate" priority="0" />
+      <Item value="while" priority="1" />
+      <Item value="currentIndex" priority="6" />
+      <Item value="yield return" priority="1" />
+      <Item value="bigArray" priority="1" />
+      <Item value="Console`0" priority="2" />
+      <Item value="i" priority="2" />
+      <Item value="BitArray`0" priority="2" />
+      <Item value="bool" priority="0" />
+      <Item value="index" priority="1" />
+      <Item value="this" priority="0" />
+      <Item value="LargeBitArray`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Linq.Enumerable">
+      <Item value="Range`0" priority="1" />
+      <Item value="Repeat`1" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Collections.Generic.List`1">
+      <Item value="Add`0" priority="2" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Collections.Generic.IEnumerable`1">
+      <Item value="ToList`1" priority="0" />
+      <Item value="Count`1" priority="1" />
+      <Item value="Select`2" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:primegen.BigListOfLongs">
+      <Item value="Max`2" priority="0" />
+      <Item value="LongCount`1" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Console">
+      <Item value="WriteLine`0" priority="1" />
+      <Item value="ReadLine`0" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:primegen.LargeBitArray">
+      <Item value="LongCount`1" priority="0" />
+    </ItemStatistics>
+  </CompletionStatisticsManager>
 </Configuration>

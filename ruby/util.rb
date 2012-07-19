@@ -24,6 +24,61 @@ module Util
       primes_to_test.find_all {|p| n % p == 0 }
     end
   end
+  
+  def triangle_numbers_til x
+	counter = 1
+	current = 1
+	while current <= x do
+		yield current
+		counter += 1
+		current = counter * (counter + 1) / 2
+	end
+  end
+  module_function :triangle_numbers_til
+  
+  def square_numbers_til x
+	counter = 1
+	current = 1
+	while current <= x do
+		yield current
+		counter += 1
+		current = counter * counter
+	end
+  end
+  module_function :square_numbers_til
+  
+  def pentagonal_numbers_til x
+	counter = 1
+	current = 1
+	while current <= x do
+		yield current
+		counter += 1
+		current = counter * (3 * counter - 1) / 2
+	end
+  end
+  module_function :pentagonal_numbers_til
+  
+  def hexagonal_numbers_til x
+	counter = 1
+	current = 1
+	while current <= x do
+		yield current
+		counter += 1
+		current = counter * (5 * counter - 3) / 2
+	end
+  end
+  module_function :hexagonal_numbers_til
+  
+  def octagonal_numbers_til x
+	counter = 1
+	current = 1
+	while current <= x do
+		yield current
+		counter += 1
+		current = counter * (3 * counter - 2)
+	end
+  end
+  module_function :octagonal_numbers_til
 end
 
 class Integer
